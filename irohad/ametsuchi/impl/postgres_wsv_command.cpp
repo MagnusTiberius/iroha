@@ -24,6 +24,17 @@ namespace iroha {
     PostgresWsvCommand::PostgresWsvCommand(pqxx::nontransaction &transaction)
         : transaction_(transaction) {}
 
+    bool PostgresWsvCommand::insertRole(const std::string &role_name) {
+      // TODO: implement
+      return false;
+    };
+
+    bool PostgresWsvCommand::insertAccountRole(const std::string &account_id,
+                                               const std::string &role_name) {
+      // TODO: implement
+      return false;
+    };
+
     bool PostgresWsvCommand::insertAccount(const model::Account &account) {
       pqxx::binarystring master_key(account.master_key.data(),
                                     account.master_key.size());
@@ -138,8 +149,8 @@ namespace iroha {
         transaction_.exec(
             "DELETE FROM account_has_signatory\n"
             " WHERE account_id=" +
-            transaction_.quote(account_id) + " AND public_key=" +
-            transaction_.quote(public_key) + ";");
+            transaction_.quote(account_id) +
+            " AND public_key=" + transaction_.quote(public_key) + ";");
       } catch (const std::exception &e) {
         return false;
       }
@@ -168,8 +179,8 @@ namespace iroha {
         transaction_.exec(
             "DELETE FROM peer\n"
             " WHERE public_key=" +
-            transaction_.quote(public_key) + " AND address=" +
-            transaction_.quote(peer.address) + ";");
+            transaction_.quote(public_key) +
+            " AND address=" + transaction_.quote(peer.address) + ";");
       } catch (const std::exception &e) {
         return false;
       }
@@ -209,8 +220,8 @@ namespace iroha {
         transaction_.exec(
             "UPDATE account\n"
             "   SET master_key=" +
-            transaction_.quote(master_key) + ", quorum=" +
-            transaction_.quote(account.quorum) + ", status=" +
+            transaction_.quote(master_key) +
+            ", quorum=" + transaction_.quote(account.quorum) + ", status=" +
             /*account.status*/ transaction_.quote(0) + ", transaction_count=" +
             /*account.transaction_count*/ transaction_.quote(0) +
             ", permissions=" + transaction_.quote(permissions.str()) +
