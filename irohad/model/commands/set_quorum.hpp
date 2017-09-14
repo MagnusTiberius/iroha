@@ -39,7 +39,7 @@ namespace iroha {
       uint32_t new_quorum;
 
       bool operator==(const Command& command) const override;
-      bool operator!=(const Command& command) const override;
+
     };
   }  // namespace model
 }  // namespace iroha

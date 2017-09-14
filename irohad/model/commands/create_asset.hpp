@@ -45,7 +45,7 @@ namespace iroha {
       uint8_t precision;
 
       bool operator==(const Command& command) const override;
-      bool operator!=(const Command& command) const override;
+
     };
   }  // namespace model
 }  // namespace iroha

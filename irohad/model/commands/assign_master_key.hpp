@@ -40,7 +40,7 @@ namespace iroha {
       ed25519::pubkey_t pubkey;
 
       bool operator==(const Command& command) const override;
-      bool operator!=(const Command& command) const override;
+
     };
   }  // namespace model
 }  // namespace iroha
